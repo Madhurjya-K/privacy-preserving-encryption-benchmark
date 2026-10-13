@@ -1,0 +1,26 @@
+test_aad_tamper_and_nonce_reuse (test_crypto.AESGCMTests.test_aad_tamper_and_nonce_reuse) ... skipped 'cryptography missing'
+test_bounds_and_ciphertext (test_crypto.CryptoTests.test_bounds_and_ciphertext) ... ok
+test_chaos_exact_rational (test_crypto.CryptoTests.test_chaos_exact_rational) ... ok
+test_production_key_policy (test_crypto.CryptoTests.test_production_key_policy) ... ok
+test_rounding_null_and_negative (test_crypto.CryptoTests.test_rounding_null_and_negative) ... ok
+test_signed_addition_and_randomness (test_crypto.CryptoTests.test_signed_addition_and_randomness) ... ok
+test_zero_state_retry (test_crypto.CryptoTests.test_zero_state_retry) ... ok
+test_bad_backend_no_fallback (test_pipeline.PipelineTests.test_bad_backend_no_fallback) ... ok
+test_correctness_configs_null_semantics (test_pipeline.PipelineTests.test_correctness_configs_null_semantics) ... ok
+test_hidden_group_rejected (test_pipeline.PipelineTests.test_hidden_group_rejected) ... ok
+test_hybrid_roundtrip (test_pipeline.PipelineTests.test_hybrid_roundtrip) ... ok
+test_owner_rollback_and_manifest_tamper (test_pipeline.PipelineTests.test_owner_rollback_and_manifest_tamper) ... ok
+test_tamper_classes (test_pipeline.PipelineTests.test_tamper_classes) ... ok
+test_within_partition_reorder_intentionally_not_detected (test_pipeline.PipelineTests.test_within_partition_reorder_intentionally_not_detected) ... ok
+test_bounded_recovery_runs (test_security_reporting.SecurityTests.test_bounded_recovery_runs) ... ok
+test_exposure_scope (test_security_reporting.SecurityTests.test_exposure_scope) ... ok
+test_nonce_reuse (test_security_reporting.SecurityTests.test_nonce_reuse) ... ok
+test_nsl_schema_and_insufficient_size (test_security_reporting.SecurityTests.test_nsl_schema_and_insufficient_size) ... ok
+test_sensitivity_and_cycle_bounded (test_security_reporting.SecurityTests.test_sensitivity_and_cycle_bounded) ... ok
+test_summary (test_security_reporting.SecurityTests.test_summary) ... ok
+test_real_spark_reduce_matches_python (test_spark.SparkTests.test_real_spark_reduce_matches_python) ... skipped 'opt-in actual Spark integration test; JVM/pyspark required'
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.173s
+
+OK (skipped=2)
