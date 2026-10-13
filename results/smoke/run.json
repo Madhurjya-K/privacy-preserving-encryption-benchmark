@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-11T11:37:10.660204+00:00",
+  "status": "synthetic/Python smoke only; NOT Spark or publishable public-data evidence",
+  "parameters": {
+    "rows": 12,
+    "configs": [
+      "PLAIN",
+      "H-CHAOS"
+    ],
+    "repeats": 2,
+    "warmups": 1,
+    "key_bits": 128,
+    "backend": "python-smoke",
+    "partition_size": 1000,
+    "scale": 100,
+    "group": "payment_type",
+    "workloads": [
+      "grouped SUM/COUNT(*)/AVG",
+      "global SUM/COUNT(*)/AVG"
+    ]
+  },
+  "key_generation": {
+    "seconds": 0.2301004,
+    "peak_python_bytes": 1476,
+    "excluded_from_stage_timings": true
+  },
+  "provenance": {
+    "kind": "synthetic",
+    "seed": 2024,
+    "publishable": false
+  },
+  "environment": {
+    "python": "3.12.7 (main, Oct 16 2024, 00:21:24) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "",
+    "processor": "",
+    "cpu_count": 12,
+    "packages": {
+      "cryptography": null,
+      "pandas": null,
+      "pyarrow": null,
+      "pyspark": null,
+      "matplotlib": null
+    },
+    "memory_metric": "tracemalloc Python peak bytes; excludes native allocations and Spark workers/JVM",
+    "clock": "perf_counter_ns"
+  },
+  "query_result": {
+    "grouped": {
+      "0": {
+        "count_star": 6,
+        "fields": {
+          "fare_amount": {
+            "sum": "153.88",
+            "count_nonnull": 5,
+            "avg": "30.776"
+          },
+          "trip_distance": {
+            "sum": "66.25",
+            "count_nonnull": 6,
+            "avg": "11.04166666666666666666666667"
+          },
+          "tip_amount": {
+            "sum": "23.27",
+            "count_nonnull": 4,
+            "avg": "5.8175"
+          }
+        }
+      },
+      "1": {
+        "count_star": 6,
+        "fields": {
+          "fare_amount": {
+            "sum": "162.5",
+            "count_nonnull": 5,
+            "avg": "32.5"
+          },
+          "trip_distance": {
+            "sum": "63.72",
+            "count_nonnull": 6,
+            "avg": "10.62"
+          },
+          "tip_amount": {
+            "sum": "33.88",
+            "count_nonnull": 5,
+            "avg": "6.776"
+          }
+        }
+      }
+    },
+    "global": {
+      "ALL": {
+        "count_star": 12,
+        "fields": {
+          "fare_amount": {
+            "sum": "316.38",
+            "count_nonnull": 10,
+            "avg": "31.638"
+          },
+          "trip_distance": {
+            "sum": "129.97",
+            "count_nonnull": 12,
+            "avg": "10.83083333333333333333333333"
+          },
+          "tip_amount": {
+            "sum": "57.15",
+            "count_nonnull": 9,
+            "avg": "6.35"
+          }
+        }
+      }
+    }
+  },
+  "bounded_exposure_audit": {
+    "PLAIN": {
+      "scope": "protected JSON bytes only; no JVM/worker heap, OS swap, temp files or logs scanned",
+      "canary_occurrences": {
+        "PPBENCH_CANARY_00000000_SENSITIVE": true,
+        "PPBENCH_CANARY_00000001_SENSITIVE": true,
+        "PPBENCH_CANARY_00000002_SENSITIVE": true,
+        "PPBENCH_CANARY_00000003_SENSITIVE": true,
+        "PPBENCH_CANARY_00000004_SENSITIVE": true,
+        "PPBENCH_CANARY_00000005_SENSITIVE": true,
+        "PPBENCH_CANARY_00000006_SENSITIVE": true,
+        "PPBENCH_CANARY_00000007_SENSITIVE": true,
+        "PPBENCH_CANARY_00000008_SENSITIVE": true,
+        "PPBENCH_CANARY_00000009_SENSITIVE": true,
+        "PPBENCH_CANARY_00000010_SENSITIVE": true,
+        "PPBENCH_CANARY_00000011_SENSITIVE": true
+      },
+      "proof": false,
+      "warning": "absence of canaries is not proof of zero exposure; numeric strings can coincidentally occur in ciphertext representations"
+    },
+    "H-CHAOS": {
+      "scope": "protected JSON bytes only; no JVM/worker heap, OS swap, temp files or logs scanned",
+      "canary_occurrences": {
+        "PPBENCH_CANARY_00000000_SENSITIVE": false,
+        "PPBENCH_CANARY_00000001_SENSITIVE": false,
+        "PPBENCH_CANARY_00000002_SENSITIVE": false,
+        "PPBENCH_CANARY_00000003_SENSITIVE": false,
+        "PPBENCH_CANARY_00000004_SENSITIVE": false,
+        "PPBENCH_CANARY_00000005_SENSITIVE": false,
+        "PPBENCH_CANARY_00000006_SENSITIVE": false,
+        "PPBENCH_CANARY_00000007_SENSITIVE": false,
+        "PPBENCH_CANARY_00000008_SENSITIVE": false,
+        "PPBENCH_CANARY_00000009_SENSITIVE": false,
+        "PPBENCH_CANARY_00000010_SENSITIVE": false,
+        "PPBENCH_CANARY_00000011_SENSITIVE": false
+      },
+      "proof": false,
+      "warning": "absence of canaries is not proof of zero exposure; numeric strings can coincidentally occur in ciphertext representations"
+    }
+  },
+  "samples": [
+    {
+      "config": "PLAIN",
+      "repeat": 0,
+      "rows": 12,
+      "backend": "python-smoke",
+      "protection_sec": 0.007131,
+      "integrity_verification_sec": 0.0070263,
+      "query_sec": 0.0034283,
+      "final_decryption_sec": 0.0003868,
+      "serialization_sec": 0.0033833,
+      "hashing_sec": 0.0001188,
+      "plain_serialization_control_sec": 0.0022273,
+      "plain_hash_control_sec": 9.53e-05,
+      "protected_bytes": 4166,
+      "plaintext_bytes": 3306,
+      "protection_peak_python_bytes": 15377,
+      "query_peak_python_bytes": 4560,
+      "final_decryption_peak_python_bytes": 4688,
+      "integrity_peak_python_bytes": 10848,
+      "serialization_peak_python_bytes": 10046,
+      "hashing_peak_python_bytes": 197,
+      "control_peak_python_bytes": 7878,
+      "hash_control_peak_python_bytes": 197,
+      "protected_sha256": "7df7ebc1ea423a2018f38bc38bd21f598f9b38c3379333dfa1f11b7fa06a1452"
+    },
+    {
+      "config": "PLAIN",
+      "repeat": 1,
+      "rows": 12,
+      "backend": "python-smoke",
+      "protection_sec": 0.0055791,
+      "integrity_verification_sec": 0.0035184,
+      "query_sec": 0.002736,
+      "final_decryption_sec": 0.0003852,
+      "serialization_sec": 0.0013348,
+      "hashing_sec": 7.96e-05,
+      "plain_serialization_control_sec": 0.0014327,
+      "plain_hash_control_sec": 7e-05,
+      "protected_bytes": 4166,
+      "plaintext_bytes": 3306,
+      "protection_peak_python_bytes": 15353,
+      "query_peak_python_bytes": 4560,
+      "final_decryption_peak_python_bytes": 4688,
+      "integrity_peak_python_bytes": 10848,
+      "serialization_peak_python_bytes": 10046,
+      "hashing_peak_python_bytes": 197,
+      "control_peak_python_bytes": 7878,
+      "hash_control_peak_python_bytes": 197,
+      "protected_sha256": "7df7ebc1ea423a2018f38bc38bd21f598f9b38c3379333dfa1f11b7fa06a1452"
+    },
+    {
+      "config": "H-CHAOS",
+      "repeat": 0,
+      "rows": 12,
+      "backend": "python-smoke",
+      "protection_sec": 0.1485307,
+      "integrity_verification_sec": 0.002333,
+      "query_sec": 0.0018229,
+      "final_decryption_sec": 0.0093707,
+      "serialization_sec": 0.0021913,
+      "hashing_sec": 7.56e-05,
+      "plain_serialization_control_sec": 0.0019282,
+      "plain_hash_control_sec": 7.11e-05,
+      "protected_bytes": 9310,
+      "plaintext_bytes": 3306,
+      "protection_peak_python_bytes": 40445,
+      "query_peak_python_bytes": 4628,
+      "final_decryption_peak_python_bytes": 5461,
+      "integrity_peak_python_bytes": 21076,
+      "serialization_peak_python_bytes": 20278,
+      "hashing_peak_python_bytes": 197,
+      "control_peak_python_bytes": 7878,
+      "hash_control_peak_python_bytes": 197,
+      "protected_sha256": "8a3edd10bb83f46d143433384702acfe6a99d85c2c17427200d767a9fc38533b"
+    },
+    {
+      "config": "H-CHAOS",
+      "repeat": 1,
+      "rows": 12,
+      "backend": "python-smoke",
+      "protection_sec": 0.1398386,
+      "integrity_verification_sec": 0.0041589,
+      "query_sec": 0.0013505,
+      "final_decryption_sec": 0.0176528,
+      "serialization_sec": 0.0020597,
+      "hashing_sec": 8.57e-05,
+      "plain_serialization_control_sec": 0.0019112,
+      "plain_hash_control_sec": 6.84e-05,
+      "protected_bytes": 9313,
+      "plaintext_bytes": 3306,
+      "protection_peak_python_bytes": 40446,
+      "query_peak_python_bytes": 4628,
+      "final_decryption_peak_python_bytes": 5461,
+      "integrity_peak_python_bytes": 21082,
+      "serialization_peak_python_bytes": 20284,
+      "hashing_peak_python_bytes": 197,
+      "control_peak_python_bytes": 7878,
+      "hash_control_peak_python_bytes": 197,
+      "protected_sha256": "805c2a026439962e8d1447904f5d66a7ed99eb1b17b1b25c3c20341aa9e4fe37"
+    }
+  ]
+}
