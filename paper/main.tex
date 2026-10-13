@@ -1,0 +1,141 @@
+\documentclass[conference]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,booktabs,array}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\pending}{\textit{pending}}
+\title{A Reproducible Hybrid Encryption Framework for Privacy-Preserving Big Data Analytics: Implementation and Evaluation Protocol}
+\author{\IEEEauthorblockN{Madhurjya Kakati and Gracy Sonwan}}
+\begin{document}
+\maketitle
+\begin{abstract}
+Conventional cloud analytics exposes individual values when encrypted records are decrypted for computation. We implement a selective hybrid framework that protects aggregation fields with Paillier encryption, protects unused sensitive tuples with either AES-GCM or an explicitly experimental finite-state chaotic mask, and authenticates canonical stored partitions through an HMAC-SHA-256 manifest. Four configurations share signed fixed-point query semantics: plaintext, AES decrypt-then-analyze, hybrid chaos, and hybrid AES-GCM. The implementation contains an actual optional local Spark map--reduce backend and a separately labeled Python smoke backend. It records raw timing samples, provenance, Python allocation peaks, serialization and hashing controls, and seeded statistical summaries. Only small synthetic Python smoke execution is available at this stage; public-dataset Spark experiments, full-size cryptographic runs and external randomness testing remain pending. We make no claim of measured speedup, production security, cloud scalability or unrestricted resistance to chaotic-state recovery. The contribution is an executable and explicitly bounded research artifact, with an evaluation protocol designed to reject as well as confirm hypotheses.
+\end{abstract}
+\begin{IEEEkeywords}
+Paillier, privacy-preserving analytics, AES-GCM, Apache Spark, reproducibility, authenticated manifests, experimental cryptography
+\end{IEEEkeywords}
+
+\section{Introduction}
+Cloud analytics often decrypts records before aggregation, leaving individual values available to a worker that can inspect its memory or inputs. Fully homomorphic encryption permits broader protected computation but is not required for every additive workload. Paillier's probabilistic public-key system supports addition through ciphertext multiplication~\cite{paillier}. This narrower property motivates field-level protection: preserve only the functionality needed for descriptive SUM and AVG queries, while making grouping keys visible.
+
+Our work operationalizes the supplied design manuscript instead of presenting an unsupported performance advantage. A standardized sensitive-field layer is essential as a comparator: AES-GCM provides authenticated encryption under its nonce requirements~\cite{aes,gcm}, whereas a digitally truncated logistic map has no equivalent assurance. The cryptanalytic literature warns that visually random output, sensitivity and large nominal keys do not establish chaos-based cryptographic security~\cite{alvarez,arroyo}.
+
+The research questions are: (RQ1) what protection and per-query costs arise relative to plaintext and AES decrypt-then-analyze; (RQ2) how costs and storage change across public-data sizes; (RQ3) which stored-data attacks an authenticated manifest detects; and (RQ4) whether any practical chaotic-layer advantage can justify its unresolved security risk. Public-data results are pending. We explicitly separate inherited primitive properties, implementation choices, observed synthetic functionality and hypotheses requiring experiments.
+
+\section{Related Work and Scope}
+Spark supplies a parallel execution engine~\cite{spark}. Encrypted-query systems such as CryptDB~\cite{cryptdb} and Monomi~\cite{monomi} support richer database functionality than this harness. We do not claim novelty for homomorphic sums or superiority over those systems. Our narrower purpose is a controlled, reproducible four-configuration comparison with authenticated stored partitions and transparent arithmetic. Paillier is not general SQL: encrypted comparisons, medians, products of encrypted fields, hidden-category grouping and arbitrary joins are unsupported.
+
+Integrity and output confidentiality are separate. SHA-256 hashes~\cite{sha256} need an authenticated reference; HMAC~\cite{hmac} authenticates the manifest, but cannot prove a worker computed the prescribed aggregate. Nor does protected processing prevent inference from released aggregates. Differential privacy is a separate possible complement~\cite{dwork}, not a feature of this implementation.
+
+\section{Threat Model and Leakage}
+The owner is trusted to classify fields, generate keys, verify bounds and manifests, and decrypt aggregate results. A semi-honest worker follows the query while inspecting its inputs and outputs. An attacker may modify stored partitions; owner-key compromise, side channels, a malicious owner, verifiable computation and a privileged attacker on the local owner machine are outside scope.
+
+The optional local Spark driver retains owner keys on the same machine. Hybrid worker closures receive ciphertexts, visible fields and the public modulus, not the Paillier private key. This arrangement expresses an owner/worker code-path distinction, not hardened cloud isolation. The AES baseline intentionally sends its AES key to workers and decrypts there; the Python fallback performs the corresponding baseline locally.
+
+Leakage includes group keys, record identifiers, counts, partition boundaries, ciphertext lengths, null locations, access/query patterns and per-field maximum absolute encoded-value bounds. Bounds are authenticated metadata but reveal information derived from plaintext. An alternative protocol could use public conservative bounds chosen independently of the dataset. A group containing one row reveals that row's value through its sum, and overlapping query differences may do the same. No output privacy mechanism or minimum-group threshold is implemented.
+
+\section{Cryptographic and Arithmetic Specification}
+\subsection{Paillier and Signed Fixed Point}
+For distinct probable primes $p,q$, let $n=pq$, $\lambda=\operatorname{lcm}(p-1,q-1)$, and $g=n+1$. For integer $m$ and fresh uniformly sampled coprime $r\in\mathbb{Z}_n^*$,
+\begin{equation}
+E_n(m;r)=(1+nm)r^n\bmod n^2.
+\end{equation}
+The implementation uses 64 independent Miller--Rabin rounds for candidate primes; these are probable, not certified primes. The research CLI rejects moduli below 2048 bits. Short 128-bit keys occur only in explicitly test-only synthetic smoke; those are insecure and not performance evidence for the research configuration. Python integer arithmetic is not a constant-time or independently audited implementation.
+
+At scale $s=100$, values are encoded by Decimal HALF\_EVEN rounding: $\hat{x}=\operatorname{round}_{\rm even}(sx)$. Negative values are represented modulo $n$. Decryption accepts nonnegative representatives below $\lfloor n/3\rfloor$, converts representatives above $n-\lfloor n/3\rfloor$ to negative values, and rejects the middle region. This conservative middle-third sentinel differs from the supplied design's half-modulus split. It is an implementation safety choice, not sufficient wraparound detection. The mandatory preflight is
+\begin{equation}
+N\max_i|\hat{x}_i|<\lfloor n/3\rfloor.
+\end{equation}
+Every query rechecks the authenticated bound. Ciphertexts are range-checked and required to be units modulo $n$ before private decryption. SUM decrypts the modular ciphertext product. COUNT(*) includes null rows; AVG divides by each field's non-null count, not COUNT(*). An all-null SUM and AVG are null. For example, rounded $-1.235$ and $2.225$ become $-124$ and $222$, yielding sum $0.98$ and average $0.49$ at scale 100. Binary-float summation is not the reference semantics.
+
+\subsection{General-Layer Variants}
+AES-GCM uses an independent 32-byte key and a fresh 12-byte nonce per record. The UTF-8 record identifier is authenticated associated data. Hybrid sensitive fields are serialized together, excluding visible and numeric fields. AES-DEC instead encrypts complete records, a broader baseline than encrypting numeric columns alone.
+
+For the experimental mask, define $M=2^{64}$ and $d=\operatorname{SHA256}(K_c\Vert\nu)$. $X_0$ is the first eight bytes interpreted big-endian, and $u$ is the next four. If $X_0=0$, counter-extended derivation is retried. Exact rational integer arithmetic computes
+\begin{align}
+r_q&=\left\lfloor\frac{3900\,2^{32}+99u}{1000}\right\rfloor,\\
+X_{t+1}&=(r_q X_t(M-X_t))\gg96.
+\end{align}
+After discarding 1024 iterations, each byte is $(X_t\gg32)\mathbin{\&}255$ after the next update. The resulting bytes XOR the serialized tuple. No authentication is inherent in this mask: integrity relies on the separate manifest. A 64-bit finite state is not a 256-bit cipher security claim, even though derivation uses a 256-bit key.
+
+AES nonce tracking rejects reuse within a RecordCipher object; chaos protection rejects duplicate generated nonces within one bundle. Independent calls use random nonces and do not implement a durable cross-run allocation registry. Long-lived deployments need key rotation or persistent nonce allocation. Nonce reuse demonstrations deliberately violate the rule and confirm $C_1\oplus C_2=P_1\oplus P_2$ for the chaotic mask.
+
+\subsection{Authenticated Canonical Partitions}
+Records use sorted-key, compact UTF-8 JSON, with nonfinite JSON numbers rejected. Complete record byte strings are sorted within a partition before hashing. The manifest authenticates format, owner, externally supplied current version, partition index, count and SHA-256. Configuration, scale, bounds and field metadata form an additional authenticated metadata partition. Verification recomputes all entries and HMAC before comparing owner/version.
+
+Canonicalization intentionally discards within-partition order, so permutation there is \emph{not detected}. Changing contents, deleting/inserting/duplicating records, moving records between partitions, swapping unequal partitions, substituting nonces or Paillier ciphertexts, changing metadata, replacing a digest without the HMAC key, or replaying a version other than the owner's trusted current version is rejected in the bounded tests. A current version read only from an attacker-controlled manifest would not prevent rollback. Verification authenticates storage, not the returned computation; a malicious worker can submit an unrelated aggregate.
+
+\section{Implementation Architecture}
+The Python package separates cryptographic primitives, canonical integrity, dataset readers, protection/query/finalization, measurements, statistical reporting and bounded adversarial diagnostics. Unit tests use the standard library. AES-GCM is supplied by the cryptography dependency, not a handwritten AES implementation. Dataset and Spark dependencies are optional.
+
+The Spark backend creates local[*] execution and uses RDD map plus reduceByKey. Each mapped hybrid row supplies an encrypted numerator, a non-null count per numeric field and COUNT(*). Reduction multiplies numerators modulo $n^2$ and adds counts. Both grouped and global queries are executed. Only aggregated numerators are decrypted by the owner. The AES baseline decrypts in worker map functions. Python smoke uses the same modular-product semantics without Spark. An unavailable Spark backend raises rather than silently falling back.
+
+Library query and materialization functions deliberately do not auto-verify so stages can be timed separately. The benchmark verifies first; external callers must do so as well. No private key is serialized into run artifacts. Paillier ciphertexts are represented as decimal strings, so protected storage measurements include JSON and decimal encoding, not only the theoretical 4096-bit packed ciphertext length.
+
+\section{Public-Dataset Evaluation Protocol}
+\subsection{Frozen Inputs and Workloads}
+The primary input is NYC TLC yellow taxi January 2024, specifically yellow\_tripdata\_2024-01.parquet~\cite{tlc}. Aggregation fields are fare\_amount, trip\_distance and tip\_amount. payment\_type and VendorID are visible. Pickup/drop-off timestamps and location identifiers form the sensitive tuple. Missing source values become null, timestamps become ISO strings and negative refunds remain. No unstated outlier removal is performed.
+
+The secondary input is NSL-KDD KDDTrain+.txt~\cite{nsl}. Its fixed schema contains 41 features, label and difficulty. duration, src\_bytes and dst\_bytes are aggregation fields; protocol\_type is visible. Remaining fields, including service and flag, are sensitive. Local original files are manually supplied; the loader records their actual byte SHA-256, source row count, sampling seed and selected-index hash. A source URL and download date must also be recorded by the experimenter. A computed checksum is not independent source authentication.
+
+Intended sample sizes are $10^4$, $5\times10^4$, $10^5$ and $5\times10^5$, using seed 2024 without replacement. KDDTrain+ contains fewer than $5\times10^5$ rows; that cell is unavailable and must be skipped rather than replicated. Readers reject oversized samples. Source loading materializes the full input before sampling and is excluded from measured phases.
+
+\begin{table}[t]
+\centering\caption{Configurations and evidence status}
+\begin{tabular}{lll}\toprule
+ID & Numeric/sensitive protection & Public Spark\\\midrule
+PLAIN & plaintext/plaintext & \pending\\
+AES-DEC & full-record AES-GCM & \pending\\
+H-CHAOS & Paillier/experimental mask & \pending\\
+H-GCM & Paillier/AES-GCM & \pending\\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Measurements and Controls}
+Public runs require at least ten measured repeats after at least one warmup per configuration. Fresh encryption randomness and nonces are used each repeat; one shared Paillier keypair is generated per run and timed separately. All configurations share samples and semantics. The current fixed configuration execution order is a limitation; future publication runs should use a preregistered randomized or blocked order to control drift.
+
+Atomic per-sample checkpoints preserve completed measurements across interruptions. Resume requires identical configuration and dataset provenance, regenerates fresh keys without persisting secrets, records a new execution environment/keygen session and reruns warmups for unfinished configurations. Interrupted samples restart from protection; completed configuration/repeat pairs are skipped. Session drift must be reported.
+
+Raw samples separately record protection including manifest construction, integrity verification, combined grouped/global query execution, combined final aggregate decryption, protected serialization and protected whole-file hashing. Plain serialization and hashing controls are measured but not subtracted. The reported end-to-end value is the sum of these six stages, not a separate whole-job stopwatch. Spark startup, dataset loading, GC intervals, controls and network transfer are not included. Throughput is $N/T$ for this precisely defined combined workload. Protected-byte expansion includes the metadata and manifest.
+
+Per-stage Python allocation peaks use tracemalloc. This is \emph{not} full RSS: JVM, Spark workers, native cryptographic allocations, OS swap and spill are not fully measured. An optional psutil monitor records sampled process-tree RSS and cumulative CPU seconds for the driver and discoverable descendants, including a local JVM and Python workers when present. RSS includes baseline memory and may double-count shared pages; short-lived processes and transient peaks may be missed. These are not full-system memory or CPU-utilization percentages. Actual Spark resource validation and transfer accounting remain pending. Environment artifacts record Python, platform, CPU count and installed dependency versions.
+
+Summaries report median and linearly interpolated IQR, plus seeded 2000-resample percentile bootstrap confidence intervals for medians. Descriptive overhead uses repeat-index ratios against baseline samples, then bootstrap summaries of those ratios. Sequential repeat indexes are not contemporaneous paired trials. Two-repeat synthetic smoke cannot support reliable performance inference.
+
+\section{Adversarial Evaluation and Current Validation}
+Unit tests include negative rounding, null arithmetic, ciphertext randomization, range rejection, signed overflow sentinels, exact rational map updates, zero-state retry, sensitive-tuple round trips and explicit storage attack classes. A dedicated opt-in integration test compares actual Spark reductions with Python. AES-GCM tests check wrong AAD, modified ciphertext and explicit nonce reuse when the dependency is installed.
+
+Initial host validation executed 21 unittest methods: 19 passed and two were skipped because AES-GCM's dependency was unavailable and Spark integration was not enabled. The configuration-comparison method exercised only available PLAIN/H-CHAOS paths. Small Python smoke used 12 synthetic records, test-only 128-bit keys, one warmup and two measured repeats for those two configurations, producing four genuine raw samples. These demonstrate bounded functionality, not public-data results. A subsequent parent-cached cryptography runtime executed 22 methods: 21 passed, with only actual Spark skipped. All four configurations then completed a second 12-record Python smoke, producing eight measured samples; completed-checkpoint resumption returned them unchanged. Partial-checkpoint tests verified sample preservation, mismatch rejection and fresh-key session tracking. Secure-size public benchmarks and actual Spark validation remain pending.
+
+The bounded security harness runs input-bit sensitivity and full-state cycle scans over finite trajectories. It deliberately reuses a chaos nonce to demonstrate XOR leakage. A restricted state search is granted $r_q$ and the high 52 bits of the post-discard state, then enumerates 4096 low-bit candidates against eight known bytes and checks eight held-out predictions. In the initial diagnostic all 4096 candidates matched both short prefixes, so unique state recovery was not achieved. Such privileged prior knowledge makes this a restricted diagnostic, not unrestricted state or key recovery. Finding no short cycle within a scan proves nothing about longer cycles. Neither sensitivity nor output statistics establishes cryptographic security.
+
+The complete external NIST SP 800-22 suite~\cite{nist22} remains pending; homegrown diagnostics are not labeled NIST tests. Even successful external statistical testing would not establish confidentiality. A bounded exposure audit searches serialized protected bytes for chosen literal canaries. It does not inspect worker heaps, JVM logs, spills or swap; absence of a canary is not proof that no plaintext exists. Numeric canary strings can coincidentally occur in decimal ciphertexts.
+
+\begin{table}[t]
+\centering\caption{Publication results: no public-data experiments run}
+\begin{tabular}{lcc}\toprule
+Metric & NYC Spark & NSL-KDD Spark\\\midrule
+Protection and query latency & \pending & \pending\\
+Secure-size throughput & \pending & \pending\\
+Full-system peak memory & \pending & \pending\\
+Protected storage expansion & \pending & \pending\\
+Worker exposure audit & \pending & \pending\\
+External NIST full suite & \pending & \pending\\\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Discussion and Limitations}
+Let $T_{\rm prot}^X$ and $T_q^X$ denote one-time protection and per-query costs for configuration $X$. For hybrid $H$ and AES baseline $B$, a break-even query count exists only when $T_q^B>T_q^H$:
+\begin{equation}
+q^*=\frac{T_{\rm prot}^H-T_{\rm prot}^B}{T_q^B-T_q^H}.
+\end{equation}
+No empirical costs are inserted here. Hardware-accelerated AES may be cheaper per record than large modular multiplication, so eliminating numeric plaintext exposure does not imply acceleration. Multiple additive fields also multiply Paillier protection/storage costs.
+
+The handwritten Paillier implementation is research code. Nonce persistence, hardened key management, constant-time operations, full log/spill auditing and differential privacy are not provided. The local Spark protocol cannot establish multi-node cloud scalability, fault handling or realistic network behavior. Manifest authentication cannot establish compute integrity. JSON representation and complete-record AES baseline scope affect measured costs. Fixed-order execution and incomplete memory metrics must be reported, not hidden behind confidence intervals.
+
+\section{Conclusion}
+We provide an executable, honest research baseline with field-selective protection, exact signed arithmetic, canonical authenticated storage and optional real Spark modular aggregation. The artifact includes tests, raw-sample collection, reproducible summaries and a bounded adversarial harness. Initial synthetic smoke is distinctly separated from pending secure-size public-dataset Spark experiments. No favorable performance result or security certification is asserted. The next evidentiary steps are dependency-enabled four-configuration validation, actual Spark correctness, frozen-source ten-repeat measurements, complete exposure instrumentation, external statistical testing and independent manuscript/reference review.
+
+\IfFileExists{generated-results.tex}{\input{generated-results.tex}}{}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\end{document}
