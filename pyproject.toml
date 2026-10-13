@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "privacy-preserving-encryption-benchmark"
+version = "0.1.0"
+description = "Reproducible Paillier hybrid encryption research harness"
+requires-python = ">=3.10"
+authors = [{name="Madhurjya Kakati"}, {name="Gracy Sonwan"}]
+dependencies = ["cryptography>=42"]
+
+[project.optional-dependencies]
+data = ["pandas>=2", "pyarrow>=15"]
+spark = ["pyspark>=3.5,<5"]
+charts = ["matplotlib>=3.8"]
+
+[project.scripts]
+ppbench = "ppbench.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
