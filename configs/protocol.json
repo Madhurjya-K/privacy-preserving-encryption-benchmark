@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "authors": [
+    "Madhurjya Kakati",
+    "Gracy Sonwan"
+  ],
+  "configurations": [
+    "PLAIN",
+    "AES-DEC",
+    "H-CHAOS",
+    "H-GCM"
+  ],
+  "sizes": [
+    10000,
+    50000,
+    100000,
+    500000
+  ],
+  "repeats": 10,
+  "warmups": 1,
+  "seed": 2024,
+  "paillier_bits": 2048,
+  "scale": 100,
+  "partition_size": 1000,
+  "backend": "spark",
+  "nyc_release": "yellow_tripdata_2024-01.parquet",
+  "nsl_release": "KDDTrain+.txt",
+  "nsl_size_limit": "KDDTrain+ has 125973 records; 500000 without replacement is unavailable and must be skipped, not duplicated",
+  "note": "Consumed and validated by ppbench.protocol and scripts/run_experiments.py. Any protocol change requires a separately versioned protocol and explicit implementation review."
+}
