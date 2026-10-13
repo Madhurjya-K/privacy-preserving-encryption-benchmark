@@ -1,0 +1,190 @@
+{
+  "status": "bounded experimental diagnostics only",
+  "sensitivity": [
+    {
+      "trial": 0,
+      "key_hamming_fraction": 0.50244140625,
+      "nonce_hamming_fraction": 0.49462890625
+    },
+    {
+      "trial": 1,
+      "key_hamming_fraction": 0.498046875,
+      "nonce_hamming_fraction": 0.50732421875
+    },
+    {
+      "trial": 2,
+      "key_hamming_fraction": 0.51513671875,
+      "nonce_hamming_fraction": 0.49609375
+    },
+    {
+      "trial": 3,
+      "key_hamming_fraction": 0.47607421875,
+      "nonce_hamming_fraction": 0.49267578125
+    },
+    {
+      "trial": 4,
+      "key_hamming_fraction": 0.5078125,
+      "nonce_hamming_fraction": 0.48974609375
+    },
+    {
+      "trial": 5,
+      "key_hamming_fraction": 0.50537109375,
+      "nonce_hamming_fraction": 0.498046875
+    },
+    {
+      "trial": 6,
+      "key_hamming_fraction": 0.51416015625,
+      "nonce_hamming_fraction": 0.51025390625
+    },
+    {
+      "trial": 7,
+      "key_hamming_fraction": 0.51171875,
+      "nonce_hamming_fraction": 0.4970703125
+    },
+    {
+      "trial": 8,
+      "key_hamming_fraction": 0.5029296875,
+      "nonce_hamming_fraction": 0.49755859375
+    },
+    {
+      "trial": 9,
+      "key_hamming_fraction": 0.51025390625,
+      "nonce_hamming_fraction": 0.4716796875
+    },
+    {
+      "trial": 10,
+      "key_hamming_fraction": 0.5078125,
+      "nonce_hamming_fraction": 0.49951171875
+    },
+    {
+      "trial": 11,
+      "key_hamming_fraction": 0.4873046875,
+      "nonce_hamming_fraction": 0.501953125
+    },
+    {
+      "trial": 12,
+      "key_hamming_fraction": 0.50634765625,
+      "nonce_hamming_fraction": 0.5126953125
+    },
+    {
+      "trial": 13,
+      "key_hamming_fraction": 0.48974609375,
+      "nonce_hamming_fraction": 0.49658203125
+    },
+    {
+      "trial": 14,
+      "key_hamming_fraction": 0.4990234375,
+      "nonce_hamming_fraction": 0.490234375
+    },
+    {
+      "trial": 15,
+      "key_hamming_fraction": 0.470703125,
+      "nonce_hamming_fraction": 0.51123046875
+    }
+  ],
+  "cycles": [
+    {
+      "trial": 0,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 1,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 2,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 3,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 4,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 5,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 6,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 7,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 8,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 9,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 10,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 11,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 12,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 13,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 14,
+      "steps_checked": 10000,
+      "cycle": null
+    },
+    {
+      "trial": 15,
+      "steps_checked": 10000,
+      "cycle": null
+    }
+  ],
+  "nonce_reuse": {
+    "xor_leak_confirmed": true,
+    "length": 19,
+    "interpretation": "same key/nonce exposes XOR; deliberate insecure reuse demonstration"
+  },
+  "state_recovery": {
+    "candidate_bits": 12,
+    "candidates": 4096,
+    "known_state_high_bits": 52,
+    "rq_given_to_attacker": true,
+    "prefix_matches": 4096,
+    "holdout_predictions_matching": 4096,
+    "true_state_in_matches": true,
+    "unique_state_recovered": false,
+    "interpretation": "multiple output-equivalent candidates do not constitute unique state recovery",
+    "known_bytes": 8,
+    "holdout_bytes": 8,
+    "limitation": "privileged restricted search, NOT a full 64-bit state or key recovery attack; cannot establish resistance"
+  },
+  "nist_sp800_22": {
+    "status": "pending external full-suite execution",
+    "not_substituted_by_homegrown_tests": true
+  }
+}
