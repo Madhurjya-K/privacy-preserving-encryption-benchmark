@@ -1,0 +1,1404 @@
+{
+  "schema_version": 3,
+  "created_utc": "2026-10-13T08:27:57.951829+00:00",
+  "updated_utc": "2026-10-13T08:28:04.426070+00:00",
+  "state": "complete",
+  "status": "synthetic/Python smoke only; NOT Spark or publishable public-data evidence",
+  "parameters": {
+    "rows": 12,
+    "configs": [
+      "PLAIN",
+      "AES-DEC",
+      "H-CHAOS",
+      "H-GCM"
+    ],
+    "repeats": 2,
+    "warmups": 1,
+    "key_bits": 128,
+    "backend": "python-smoke",
+    "partition_size": 1000,
+    "scale": 100,
+    "group": "payment_type",
+    "numeric": [
+      "fare_amount",
+      "trip_distance",
+      "tip_amount"
+    ],
+    "visible": [
+      "payment_type",
+      "VendorID"
+    ],
+    "test_only": true,
+    "resource_interval_sec": 0.05,
+    "protocol": null,
+    "workloads": [
+      "grouped SUM/COUNT(*)/AVG",
+      "global SUM/COUNT(*)/AVG"
+    ]
+  },
+  "key_generation": {
+    "seconds": 0.1147611,
+    "peak_python_bytes": 31252,
+    "process_tree": {
+      "available": true,
+      "sample_interval_sec": 0.05,
+      "peak_tree_rss_bytes": 27389952,
+      "tree_cpu_seconds": 0.140625,
+      "snapshots": 3,
+      "distinct_processes": 1,
+      "process_access_errors": 0,
+      "definition": {
+        "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+        "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+        "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+      }
+    },
+    "excluded_from_stage_timings": true
+  },
+  "execution_sessions": [
+    {
+      "session_index": 0,
+      "started_utc": "2026-10-13T08:27:57.951829+00:00",
+      "environment": {
+        "python": "3.12.7 (main, Oct 16 2024, 00:21:24) [MSC v.1929 64 bit (AMD64)]",
+        "platform": "Windows-11-10.0.26200-SP0",
+        "machine": "",
+        "processor": "",
+        "cpu_count": 12,
+        "packages": {
+          "cryptography": "50.0.2",
+          "pandas": null,
+          "pyarrow": null,
+          "pyspark": null,
+          "matplotlib": null,
+          "psutil": "7.2.2"
+        },
+        "memory_metric": "tracemalloc Python peak bytes; excludes native allocations and Spark workers/JVM",
+        "clock": "perf_counter_ns",
+        "process_tree_metric_definition": {
+          "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+          "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+          "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+        },
+        "spark_master": "local[*]",
+        "spark_driver_memory": "4g"
+      },
+      "key_generation": {
+        "seconds": 0.1147611,
+        "peak_python_bytes": 31252,
+        "process_tree": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 27389952,
+          "tree_cpu_seconds": 0.140625,
+          "snapshots": 3,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "excluded_from_stage_timings": true
+      }
+    }
+  ],
+  "provenance": {
+    "kind": "synthetic",
+    "seed": 2024,
+    "publishable": false
+  },
+  "environment": {
+    "python": "3.12.7 (main, Oct 16 2024, 00:21:24) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "",
+    "processor": "",
+    "cpu_count": 12,
+    "packages": {
+      "cryptography": "50.0.2",
+      "pandas": null,
+      "pyarrow": null,
+      "pyspark": null,
+      "matplotlib": null,
+      "psutil": "7.2.2"
+    },
+    "memory_metric": "tracemalloc Python peak bytes; excludes native allocations and Spark workers/JVM",
+    "clock": "perf_counter_ns",
+    "process_tree_metric_definition": {
+      "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+      "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+      "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+    },
+    "spark_master": "local[*]",
+    "spark_driver_memory": "4g"
+  },
+  "query_result": {
+    "grouped": {
+      "0": {
+        "count_star": 6,
+        "fields": {
+          "fare_amount": {
+            "sum": "153.88",
+            "count_nonnull": 5,
+            "avg": "30.776"
+          },
+          "trip_distance": {
+            "sum": "66.25",
+            "count_nonnull": 6,
+            "avg": "11.04166666666666666666666667"
+          },
+          "tip_amount": {
+            "sum": "23.27",
+            "count_nonnull": 4,
+            "avg": "5.8175"
+          }
+        }
+      },
+      "1": {
+        "count_star": 6,
+        "fields": {
+          "fare_amount": {
+            "sum": "162.5",
+            "count_nonnull": 5,
+            "avg": "32.5"
+          },
+          "trip_distance": {
+            "sum": "63.72",
+            "count_nonnull": 6,
+            "avg": "10.62"
+          },
+          "tip_amount": {
+            "sum": "33.88",
+            "count_nonnull": 5,
+            "avg": "6.776"
+          }
+        }
+      }
+    },
+    "global": {
+      "ALL": {
+        "count_star": 12,
+        "fields": {
+          "fare_amount": {
+            "sum": "316.38",
+            "count_nonnull": 10,
+            "avg": "31.638"
+          },
+          "trip_distance": {
+            "sum": "129.97",
+            "count_nonnull": 12,
+            "avg": "10.83083333333333333333333333"
+          },
+          "tip_amount": {
+            "sum": "57.15",
+            "count_nonnull": 9,
+            "avg": "6.35"
+          }
+        }
+      }
+    }
+  },
+  "bounded_exposure_audit": {
+    "PLAIN": {
+      "scope": "protected JSON bytes only; no JVM/worker heap, OS swap, temp files or logs scanned",
+      "canary_occurrences": {
+        "PPBENCH_CANARY_00000000_SENSITIVE": true,
+        "PPBENCH_CANARY_00000001_SENSITIVE": true,
+        "PPBENCH_CANARY_00000002_SENSITIVE": true,
+        "PPBENCH_CANARY_00000003_SENSITIVE": true,
+        "PPBENCH_CANARY_00000004_SENSITIVE": true,
+        "PPBENCH_CANARY_00000005_SENSITIVE": true,
+        "PPBENCH_CANARY_00000006_SENSITIVE": true,
+        "PPBENCH_CANARY_00000007_SENSITIVE": true,
+        "PPBENCH_CANARY_00000008_SENSITIVE": true,
+        "PPBENCH_CANARY_00000009_SENSITIVE": true,
+        "PPBENCH_CANARY_00000010_SENSITIVE": true,
+        "PPBENCH_CANARY_00000011_SENSITIVE": true
+      },
+      "proof": false,
+      "warning": "absence of canaries is not proof of zero exposure; numeric strings can coincidentally occur in ciphertext representations"
+    },
+    "AES-DEC": {
+      "scope": "protected JSON bytes only; no JVM/worker heap, OS swap, temp files or logs scanned",
+      "canary_occurrences": {
+        "PPBENCH_CANARY_00000000_SENSITIVE": false,
+        "PPBENCH_CANARY_00000001_SENSITIVE": false,
+        "PPBENCH_CANARY_00000002_SENSITIVE": false,
+        "PPBENCH_CANARY_00000003_SENSITIVE": false,
+        "PPBENCH_CANARY_00000004_SENSITIVE": false,
+        "PPBENCH_CANARY_00000005_SENSITIVE": false,
+        "PPBENCH_CANARY_00000006_SENSITIVE": false,
+        "PPBENCH_CANARY_00000007_SENSITIVE": false,
+        "PPBENCH_CANARY_00000008_SENSITIVE": false,
+        "PPBENCH_CANARY_00000009_SENSITIVE": false,
+        "PPBENCH_CANARY_00000010_SENSITIVE": false,
+        "PPBENCH_CANARY_00000011_SENSITIVE": false
+      },
+      "proof": false,
+      "warning": "absence of canaries is not proof of zero exposure; numeric strings can coincidentally occur in ciphertext representations"
+    },
+    "H-CHAOS": {
+      "scope": "protected JSON bytes only; no JVM/worker heap, OS swap, temp files or logs scanned",
+      "canary_occurrences": {
+        "PPBENCH_CANARY_00000000_SENSITIVE": false,
+        "PPBENCH_CANARY_00000001_SENSITIVE": false,
+        "PPBENCH_CANARY_00000002_SENSITIVE": false,
+        "PPBENCH_CANARY_00000003_SENSITIVE": false,
+        "PPBENCH_CANARY_00000004_SENSITIVE": false,
+        "PPBENCH_CANARY_00000005_SENSITIVE": false,
+        "PPBENCH_CANARY_00000006_SENSITIVE": false,
+        "PPBENCH_CANARY_00000007_SENSITIVE": false,
+        "PPBENCH_CANARY_00000008_SENSITIVE": false,
+        "PPBENCH_CANARY_00000009_SENSITIVE": false,
+        "PPBENCH_CANARY_00000010_SENSITIVE": false,
+        "PPBENCH_CANARY_00000011_SENSITIVE": false
+      },
+      "proof": false,
+      "warning": "absence of canaries is not proof of zero exposure; numeric strings can coincidentally occur in ciphertext representations"
+    },
+    "H-GCM": {
+      "scope": "protected JSON bytes only; no JVM/worker heap, OS swap, temp files or logs scanned",
+      "canary_occurrences": {
+        "PPBENCH_CANARY_00000000_SENSITIVE": false,
+        "PPBENCH_CANARY_00000001_SENSITIVE": false,
+        "PPBENCH_CANARY_00000002_SENSITIVE": false,
+        "PPBENCH_CANARY_00000003_SENSITIVE": false,
+        "PPBENCH_CANARY_00000004_SENSITIVE": false,
+        "PPBENCH_CANARY_00000005_SENSITIVE": false,
+        "PPBENCH_CANARY_00000006_SENSITIVE": false,
+        "PPBENCH_CANARY_00000007_SENSITIVE": false,
+        "PPBENCH_CANARY_00000008_SENSITIVE": false,
+        "PPBENCH_CANARY_00000009_SENSITIVE": false,
+        "PPBENCH_CANARY_00000010_SENSITIVE": false,
+        "PPBENCH_CANARY_00000011_SENSITIVE": false
+      },
+      "proof": false,
+      "warning": "absence of canaries is not proof of zero exposure; numeric strings can coincidentally occur in ciphertext representations"
+    }
+  },
+  "samples": [
+    {
+      "config": "PLAIN",
+      "repeat": 0,
+      "execution_session_index": 0,
+      "rows": 12,
+      "backend": "python-smoke",
+      "protection_sec": 0.0032331,
+      "integrity_verification_sec": 0.0024229,
+      "query_sec": 0.0019574,
+      "final_decryption_sec": 0.0002415,
+      "serialization_sec": 0.0011705,
+      "hashing_sec": 7e-05,
+      "plain_serialization_control_sec": 0.0014467,
+      "plain_hash_control_sec": 7.48e-05,
+      "protected_bytes": 4166,
+      "plaintext_bytes": 3306,
+      "protection_peak_python_bytes": 14081,
+      "query_peak_python_bytes": 3760,
+      "final_decryption_peak_python_bytes": 4040,
+      "integrity_peak_python_bytes": 10064,
+      "serialization_peak_python_bytes": 9558,
+      "hashing_peak_python_bytes": 197,
+      "control_peak_python_bytes": 7558,
+      "hash_control_peak_python_bytes": 197,
+      "protected_sha256": "9a3b1da552a5846d7298491fd1c8a4e7147a7f183c7f9df42de89b14ca27c77d",
+      "process_metrics": {
+        "protection": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31457280,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "integrity_verification": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31457280,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "query": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31461376,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "final_decryption": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31461376,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "serialization": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31461376,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "hashing": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31461376,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_serialization_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31461376,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_hash_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31461376,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        }
+      }
+    },
+    {
+      "config": "PLAIN",
+      "repeat": 1,
+      "execution_session_index": 0,
+      "rows": 12,
+      "backend": "python-smoke",
+      "protection_sec": 0.0031219,
+      "integrity_verification_sec": 0.0032208,
+      "query_sec": 0.0018448,
+      "final_decryption_sec": 0.0002217,
+      "serialization_sec": 0.0013787,
+      "hashing_sec": 6.51e-05,
+      "plain_serialization_control_sec": 0.0013495,
+      "plain_hash_control_sec": 5.34e-05,
+      "protected_bytes": 4166,
+      "plaintext_bytes": 3306,
+      "protection_peak_python_bytes": 14057,
+      "query_peak_python_bytes": 3760,
+      "final_decryption_peak_python_bytes": 4040,
+      "integrity_peak_python_bytes": 10064,
+      "serialization_peak_python_bytes": 9558,
+      "hashing_peak_python_bytes": 197,
+      "control_peak_python_bytes": 7558,
+      "hash_control_peak_python_bytes": 197,
+      "protected_sha256": "9a3b1da552a5846d7298491fd1c8a4e7147a7f183c7f9df42de89b14ca27c77d",
+      "process_metrics": {
+        "protection": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31682560,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "integrity_verification": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31682560,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "query": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31682560,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "final_decryption": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31682560,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "serialization": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31686656,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "hashing": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31686656,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_serialization_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31686656,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_hash_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 31686656,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        }
+      }
+    },
+    {
+      "config": "AES-DEC",
+      "repeat": 0,
+      "execution_session_index": 0,
+      "rows": 12,
+      "backend": "python-smoke",
+      "protection_sec": 0.003388,
+      "integrity_verification_sec": 0.0012477,
+      "query_sec": 0.0033447,
+      "final_decryption_sec": 0.0002186,
+      "serialization_sec": 0.0006635,
+      "hashing_sec": 5.91e-05,
+      "plain_serialization_control_sec": 0.0007693,
+      "plain_hash_control_sec": 5.5e-05,
+      "protected_bytes": 8265,
+      "plaintext_bytes": 3306,
+      "protection_peak_python_bytes": 31433,
+      "query_peak_python_bytes": 17981,
+      "final_decryption_peak_python_bytes": 4040,
+      "integrity_peak_python_bytes": 18202,
+      "serialization_peak_python_bytes": 17700,
+      "hashing_peak_python_bytes": 197,
+      "control_peak_python_bytes": 7558,
+      "hash_control_peak_python_bytes": 197,
+      "protected_sha256": "5a03804a39c5ae4515dbf130cea48501a0413b8dee265c27589e885397dd2965",
+      "process_metrics": {
+        "protection": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35647488,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "integrity_verification": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35647488,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "query": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35647488,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "final_decryption": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35647488,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "serialization": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35647488,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "hashing": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35647488,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_serialization_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35647488,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_hash_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35647488,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        }
+      }
+    },
+    {
+      "config": "AES-DEC",
+      "repeat": 1,
+      "execution_session_index": 0,
+      "rows": 12,
+      "backend": "python-smoke",
+      "protection_sec": 0.0031116,
+      "integrity_verification_sec": 0.0013423,
+      "query_sec": 0.0038556,
+      "final_decryption_sec": 0.0002147,
+      "serialization_sec": 0.0006105,
+      "hashing_sec": 6.06e-05,
+      "plain_serialization_control_sec": 0.0007848,
+      "plain_hash_control_sec": 6.35e-05,
+      "protected_bytes": 8265,
+      "plaintext_bytes": 3306,
+      "protection_peak_python_bytes": 31401,
+      "query_peak_python_bytes": 17949,
+      "final_decryption_peak_python_bytes": 4040,
+      "integrity_peak_python_bytes": 18202,
+      "serialization_peak_python_bytes": 17700,
+      "hashing_peak_python_bytes": 197,
+      "control_peak_python_bytes": 7558,
+      "hash_control_peak_python_bytes": 197,
+      "protected_sha256": "e386b670ee88d57ea22f11d0a618bdb6ce93b68d0d8dbca08cb9409810cb9725",
+      "process_metrics": {
+        "protection": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35659776,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "integrity_verification": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35659776,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "query": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35663872,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "final_decryption": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35663872,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "serialization": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35663872,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "hashing": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35663872,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_serialization_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35663872,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_hash_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35663872,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        }
+      }
+    },
+    {
+      "config": "H-CHAOS",
+      "repeat": 0,
+      "execution_session_index": 0,
+      "rows": 12,
+      "backend": "python-smoke",
+      "protection_sec": 0.1342267,
+      "integrity_verification_sec": 0.0016815,
+      "query_sec": 0.0010913,
+      "final_decryption_sec": 0.0078498,
+      "serialization_sec": 0.0009908,
+      "hashing_sec": 7.27e-05,
+      "plain_serialization_control_sec": 0.0007969,
+      "plain_hash_control_sec": 5.18e-05,
+      "protected_bytes": 9313,
+      "plaintext_bytes": 3306,
+      "protection_peak_python_bytes": 54040,
+      "query_peak_python_bytes": 3828,
+      "final_decryption_peak_python_bytes": 4809,
+      "integrity_peak_python_bytes": 20298,
+      "serialization_peak_python_bytes": 19796,
+      "hashing_peak_python_bytes": 197,
+      "control_peak_python_bytes": 7558,
+      "hash_control_peak_python_bytes": 197,
+      "protected_sha256": "c113320f8aaffd1c7e2367f661a184491b0e1a3cecd2add4c799c3b14bb399f1",
+      "process_metrics": {
+        "protection": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.15625,
+          "snapshots": 3,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "integrity_verification": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35692544,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "query": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35692544,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "final_decryption": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35692544,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "serialization": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35692544,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "hashing": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35692544,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_serialization_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35692544,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_hash_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35692544,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        }
+      }
+    },
+    {
+      "config": "H-CHAOS",
+      "repeat": 1,
+      "execution_session_index": 0,
+      "rows": 12,
+      "backend": "python-smoke",
+      "protection_sec": 0.1220575,
+      "integrity_verification_sec": 0.0018392,
+      "query_sec": 0.0012988,
+      "final_decryption_sec": 0.0085184,
+      "serialization_sec": 0.0013984,
+      "hashing_sec": 6.26e-05,
+      "plain_serialization_control_sec": 0.0007933,
+      "plain_hash_control_sec": 5.1e-05,
+      "protected_bytes": 9312,
+      "plaintext_bytes": 3306,
+      "protection_peak_python_bytes": 58155,
+      "query_peak_python_bytes": 3828,
+      "final_decryption_peak_python_bytes": 4809,
+      "integrity_peak_python_bytes": 20296,
+      "serialization_peak_python_bytes": 19794,
+      "hashing_peak_python_bytes": 197,
+      "control_peak_python_bytes": 7558,
+      "hash_control_peak_python_bytes": 197,
+      "protected_sha256": "a592009f60cecbc360abcfc9baf8dd3f285492f414851493fcb620f0995f5a0c",
+      "process_metrics": {
+        "protection": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35725312,
+          "tree_cpu_seconds": 0.140625,
+          "snapshots": 3,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "integrity_verification": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35700736,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "query": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35700736,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "final_decryption": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35700736,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "serialization": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35700736,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "hashing": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35704832,
+          "tree_cpu_seconds": 0,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_serialization_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35704832,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_hash_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35704832,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        }
+      }
+    },
+    {
+      "config": "H-GCM",
+      "repeat": 0,
+      "execution_session_index": 0,
+      "rows": 12,
+      "backend": "python-smoke",
+      "protection_sec": 0.0379189,
+      "integrity_verification_sec": 0.0024167,
+      "query_sec": 0.0011437,
+      "final_decryption_sec": 0.0074303,
+      "serialization_sec": 0.001029,
+      "hashing_sec": 8.94e-05,
+      "plain_serialization_control_sec": 0.0008461,
+      "plain_hash_control_sec": 5.32e-05,
+      "protected_bytes": 9671,
+      "plaintext_bytes": 3306,
+      "protection_peak_python_bytes": 40158,
+      "query_peak_python_bytes": 3828,
+      "final_decryption_peak_python_bytes": 4809,
+      "integrity_peak_python_bytes": 21018,
+      "serialization_peak_python_bytes": 20512,
+      "hashing_peak_python_bytes": 197,
+      "control_peak_python_bytes": 7558,
+      "hash_control_peak_python_bytes": 197,
+      "protected_sha256": "6c7ee5ac10424155e7609bd696a927bb0237c55484948950a024d06b167ea5e2",
+      "process_metrics": {
+        "protection": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35713024,
+          "tree_cpu_seconds": 0.0625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "integrity_verification": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35713024,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "query": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35713024,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "final_decryption": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35713024,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "serialization": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "hashing": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_serialization_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_hash_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        }
+      }
+    },
+    {
+      "config": "H-GCM",
+      "repeat": 1,
+      "execution_session_index": 0,
+      "rows": 12,
+      "backend": "python-smoke",
+      "protection_sec": 0.0347691,
+      "integrity_verification_sec": 0.0016237,
+      "query_sec": 0.001175,
+      "final_decryption_sec": 0.0063419,
+      "serialization_sec": 0.0010951,
+      "hashing_sec": 6.36e-05,
+      "plain_serialization_control_sec": 0.0007925,
+      "plain_hash_control_sec": 5.27e-05,
+      "protected_bytes": 9671,
+      "plaintext_bytes": 3306,
+      "protection_peak_python_bytes": 40142,
+      "query_peak_python_bytes": 3828,
+      "final_decryption_peak_python_bytes": 4809,
+      "integrity_peak_python_bytes": 21018,
+      "serialization_peak_python_bytes": 20512,
+      "hashing_peak_python_bytes": 197,
+      "control_peak_python_bytes": 7558,
+      "hash_control_peak_python_bytes": 197,
+      "protected_sha256": "532e8f3e86d58a2c95bcac50cd4413b0082509ad366fa439890ae48ee5b4069f",
+      "process_metrics": {
+        "protection": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.046875,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "integrity_verification": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "query": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "final_decryption": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "serialization": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "hashing": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.015625,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_serialization_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.046875,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        },
+        "plain_hash_control": {
+          "available": true,
+          "sample_interval_sec": 0.05,
+          "peak_tree_rss_bytes": 35717120,
+          "tree_cpu_seconds": 0.03125,
+          "snapshots": 2,
+          "distinct_processes": 1,
+          "process_access_errors": 0,
+          "definition": {
+            "rss": "peak over polling snapshots of sum of resident bytes for root Python process and recursively discoverable descendants (including local JVM/Python Spark workers); includes baseline resident memory; shared pages may be counted more than once; not PSS or total machine memory",
+            "cpu": "sum of maximum observed cumulative user+system CPU seconds per (pid,creation_time) minus the initial snapshot for existing processes; newly observed processes created during measurement start from zero. Short-lived or inaccessible processes may be missed. Sampling thread CPU is included in root.",
+            "limits": "sampling may miss transient peaks and exited processes; remote workers/non-descendant services excluded; no swap/page-cache/other-machine accounting; AccessDenied and disappeared processes recorded"
+          }
+        }
+      }
+    }
+  ],
+  "active_sample": null,
+  "resume_policy": "Completed samples retained verbatim; fresh independent keys per resumed execution session; rerun warmup for unfinished configurations; interrupted sample rerun from protection."
+}
