@@ -1,4 +1,4 @@
-import csv,json,random,statistics,html
+import csv,json,random,statistics,html,textwrap
 from pathlib import Path
 
 def quantile(values,p):
@@ -52,8 +52,10 @@ def summarize_run(run_path,output,charts=False):
         elements.extend(['<text x="30" y="380" font-family="sans-serif" font-size="11">Smoke is not publication evidence; numerical uncertainty is in summary.csv.</text>','</svg>'])
         (output/(metric+'.svg')).write_text('\n'.join(elements),encoding='utf-8')
     if charts:
+        import matplotlib
+        matplotlib.use('Agg')
         import matplotlib.pyplot as plt
         for metric in ('end_to_end_sec','protected_bytes'):
             selected=[r for r in rows if r['metric']==metric]
-            fig,ax=plt.subplots(); ax.bar([r['config'] for r in selected],[r['median'] for r in selected]); ax.set_ylabel(metric); ax.set_title(run['status']); fig.tight_layout(); fig.savefig(output/(metric+'.png'));plt.close(fig)
+            fig,ax=plt.subplots(); ax.bar([r['config'] for r in selected],[r['median'] for r in selected]); ax.set_ylabel(metric); ax.set_title(textwrap.fill(run['status'],70),fontsize=9); fig.tight_layout(); fig.savefig(output/(metric+'.png'));plt.close(fig)
     return rows
