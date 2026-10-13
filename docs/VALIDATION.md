@@ -19,3 +19,5 @@ No heavy dependency installation was performed here; uv created a small ephemera
 
 ## Resumed final checks 2026-10-13
 26 test methods: 25 passed, one Spark integration skip. Includes protocol immutability, numeric CSV, process-tree sampler, publication rejection for synthetic results. New smoke-20261013: 12 synthetic rows, 128-bit test-only keys, all four configs, eight measured samples, oracle correctness. Chart generation required matplotlib; rerun supplied it. NIST full suite and actual Spark/public-data experiments remain blocked/pending. No TeX compiler detected in PATH or usual installation folders. Staged files scanned for common secret formats and size limits; no raw datasets/keys/environments included. No original repository was modified; all writes target the new project.
+
+Additional secure-modulus check: 12 synthetic rows with 2048-bit Paillier completed all four configurations, one warmup and one measured sample per config. All matched the oracle. See results/validation-2048-synthetic. Still Python/synthetic, fewer than ten repeats, not paper evidence.
