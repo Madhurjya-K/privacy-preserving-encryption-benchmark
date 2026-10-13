@@ -86,10 +86,12 @@ def latex_results(paths,output):
     expanded=expand_paths(paths)
     for p in expanded:publication_guard(json.loads(p.read_text(encoding='utf-8')))
     rows,reports=numerical_rows(expanded);lookup={(r['dataset'],r['rows'],r['config'],r['metric']):r['median'] for r in rows}
-    lines=['% Generated only from complete public-data Spark >=2048-bit runs; metadata gate is not independent certification.','\\begin{table*}[t]','\\centering','\\caption{Measured public-data local-Spark medians. Latency sums the defined stages; throughput refers to the combined grouped/global workload. RSS is sampled process-tree resident memory, not PSS.}','\\label{tab:measured-results}','\\begin{tabular}{lrlrrr}','\\toprule','Dataset & Records & Configuration & Latency (s) & Records/s & Query RSS (MiB) \\\\','\\midrule']
+    lines=['% Generated only from complete public-data Spark >=2048-bit runs; metadata gate is not independent certification.','\\begin{table*}[t]','\\centering','\\caption{Measured public-data local-Spark medians with [Q1,Q3] for latency and throughput. Latency sums the defined stages; throughput refers to the combined grouped/global workload. RSS is sampled process-tree resident memory, not PSS.}','\\label{tab:measured-results}','\\begin{tabular}{lrlrrr}','\\toprule','Dataset & Records & Configuration & Latency (s) & Records/s & Query RSS (MiB) \\\\','\\midrule']
     for dataset,n,config in sorted({(r['dataset'],r['rows'],r['config']) for r in rows}):
         latency=lookup[(dataset,n,config,'end_to_end_sec')];throughput=lookup[(dataset,n,config,'throughput_records_per_sec')];rss=lookup.get((dataset,n,config,'query_peak_tree_rss_bytes'));rss_text='n/m' if rss is None else f'{rss/(1<<20):.4g}'
-        lines.append(f'{dataset} & {n} & {config} & {latency:.4g} & {throughput:.4g} & {rss_text} '+r'\\')
+        latrow=next(r for r in rows if (r['dataset'],r['rows'],r['config'],r['metric'])==(dataset,n,config,'end_to_end_sec'))
+        thrrow=next(r for r in rows if (r['dataset'],r['rows'],r['config'],r['metric'])==(dataset,n,config,'throughput_records_per_sec'))
+        lines.append(f"{dataset} & {n} & {config} & {latency:.4g} [{latrow['q1']:.4g},{latrow['q3']:.4g}] & {throughput:.4g} [{thrrow['q1']:.4g},{thrrow['q3']:.4g}] & {rss_text} "+r'\\')
     lines+=['\\bottomrule','\\end{tabular}','\\end{table*}']
     for path,r in reports:lines.append('% Source SHA-256: '+r['provenance']['sha256'])
     out=Path(output);out.parent.mkdir(parents=True,exist_ok=True);out.write_text('\n'.join(lines)+'\n',encoding='utf-8');return out
