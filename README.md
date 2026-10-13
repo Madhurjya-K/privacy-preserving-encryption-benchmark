@@ -84,7 +84,7 @@ Parent-cached cryptography runtime: 22 unittest methods, 21 passed, 1 skipped (a
 
 ## Resumed validation (2026-10-13)
 
-Fresh dependency-enabled unit run: 22 tests, 21 passed and actual Spark test skipped. Java17 portable distribution downloaded and checksum verified. PySpark3.5.3 distribution download repeatedly timed out; uv pip calls returned without installed packages, so do not assume the empty .venv is ready. Use documented pip installation on a normal local Python, or managed uv run with requirements. NYC official file download also timed out. NSLKDD mirror input was obtained and checked, but no public-data benchmark has completed. Full matrix, NIST external suite, log/spill exposure audit, TeX compilation and venue/affiliation confirmation remain pending. See docs/REFERENCE-CHECKS.md.
+Fresh dependency-enabled unit run: 22 tests, 21 passed and actual Spark test skipped. Java17 portable distribution downloaded and checksum verified. PySpark3.5.3 distribution download repeatedly timed out; uv pip calls returned without installed packages, so do not assume the empty .venv is ready. Use documented pip installation on a normal local Python, or managed uv run with requirements. NYC official file download also timed out. NSLKDD mirror input was obtained and checked, but no public-data benchmark has completed. Full matrix, NIST external suite, log/spill exposure audit, TeX compilation and venue-specific compliance remain pending (both authors’ Manipal University Jaipur affiliation confirmed 2026-10-13). See docs/REFERENCE-CHECKS.md.
 
 Matrix planning: python scripts/run_experiments.py --plan-only
 Actual matrix: python scripts/run_experiments.py --resume --keep-going (omit --resume for a new output).
@@ -94,3 +94,5 @@ Paper table: python scripts/generate_latex_results.py results/public-matrix --ou
 Linux/macOS setup: python3 -m venv .venv; source .venv/bin/activate; python -m pip install -r requirements.txt; python -m pip install -e .; export PYTHONPATH="$PWD/src"; python -m unittest discover -s tests -v. Java17 JAVA_HOME must point to your installation; Windows command equivalents appear above.
 
 Final resumed test count: 26 methods, 25 passed and one actual-Spark integration skip. Results/smoke-20261013 contains the refreshed four-configuration smoke, real sampled driver RSS/CPU metrics and generated summaries. These are still nonpublishable Python/synthetic/insecure-key measurements.
+
+Additional 2048-bit synthetic correctness check completed all four configurations (12 rows; one warmup and one measured sample each). It validates arithmetic at the research modulus, but is still not Spark/public-data performance evidence. Requirement pins are a reproducibility target; the full pinned environment has not yet been installed or validated here.
