@@ -1,0 +1,12 @@
+# Tested target: CPython 3.12, Apache Spark 3.5.3, Java 17. Install with Python 3.12.
+cryptography==44.0.3
+pyspark==3.5.3
+py4j==0.10.9.7
+pandas==2.2.3
+pyarrow==19.0.1
+numpy==2.2.6
+psutil==7.0.0
+matplotlib==3.10.3
+pytest==8.3.5
+phe==1.5.0
+# phe is an optional cross-check/reference dependency, not the production path.
