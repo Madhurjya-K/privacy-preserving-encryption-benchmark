@@ -1,0 +1,27 @@
+{
+  "purpose": "Hand-computed fixed-point reference; not measured performance",
+  "scale": 100,
+  "rounding": "ROUND_HALF_EVEN",
+  "input": [
+    "-1.235",
+    "2.225",
+    null
+  ],
+  "encoded": [
+    -124,
+    222,
+    null
+  ],
+  "expected": {
+    "count_star": 3,
+    "count_nonnull": 2,
+    "sum": "0.98",
+    "avg": "0.49"
+  },
+  "all_null": {
+    "count_star": 2,
+    "count_nonnull": 0,
+    "sum": null,
+    "avg": null
+  }
+}
