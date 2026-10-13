@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "protocol": {
+    "protocol_path": "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\configs\\protocol.json",
+    "protocol_sha256": "728197c4e26ffca3eab716757331124965b8781fc73113fc64cb355d6aada52b",
+    "version": 1
+  },
+  "selected_datasets": [
+    "nyc",
+    "nslkdd"
+  ],
+  "selected_sizes": [
+    10000,
+    50000,
+    100000,
+    500000
+  ],
+  "cells": {
+    "nyc-10000": {
+      "state": "blocked",
+      "reason": "source file absent; no automatic download",
+      "source": "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\data\\external\\yellow_tripdata_2024-01.parquet"
+    },
+    "nyc-50000": {
+      "state": "blocked",
+      "reason": "source file absent; no automatic download",
+      "source": "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\data\\external\\yellow_tripdata_2024-01.parquet"
+    },
+    "nyc-100000": {
+      "state": "blocked",
+      "reason": "source file absent; no automatic download",
+      "source": "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\data\\external\\yellow_tripdata_2024-01.parquet"
+    },
+    "nyc-500000": {
+      "state": "blocked",
+      "reason": "source file absent; no automatic download",
+      "source": "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\data\\external\\yellow_tripdata_2024-01.parquet"
+    },
+    "nslkdd-10000": {
+      "state": "planned",
+      "command": [
+        "C:\\Users\\immad\\AppData\\Local\\strawberry\\sandbox\\.sandbox-pkg-cache\\uv\\archive-v0\\fSPwEQGbwRYaSO5TgXu0n\\Scripts\\python.exe",
+        "-m",
+        "ppbench.cli",
+        "benchmark",
+        "--dataset",
+        "nslkdd",
+        "--path",
+        "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\data\\external\\KDDTrain+.txt",
+        "--size",
+        "10000",
+        "--output",
+        "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\results\\matrix-plan-20261013\\nslkdd-10000",
+        "--protocol",
+        "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\configs\\protocol.json",
+        "--expected-sha256",
+        "1b86d2f957b33082081bba410fe129b475efebcc13c9014c3f447c8271aadf95",
+        "--source-label",
+        "jmnwong mirror, checksum supplied by parent; exact download URL recorded externally"
+      ],
+      "log": "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\results\\matrix-plan-20261013\\nslkdd-10000\\execution.log"
+    },
+    "nslkdd-50000": {
+      "state": "planned",
+      "command": [
+        "C:\\Users\\immad\\AppData\\Local\\strawberry\\sandbox\\.sandbox-pkg-cache\\uv\\archive-v0\\fSPwEQGbwRYaSO5TgXu0n\\Scripts\\python.exe",
+        "-m",
+        "ppbench.cli",
+        "benchmark",
+        "--dataset",
+        "nslkdd",
+        "--path",
+        "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\data\\external\\KDDTrain+.txt",
+        "--size",
+        "50000",
+        "--output",
+        "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\results\\matrix-plan-20261013\\nslkdd-50000",
+        "--protocol",
+        "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\configs\\protocol.json",
+        "--expected-sha256",
+        "1b86d2f957b33082081bba410fe129b475efebcc13c9014c3f447c8271aadf95",
+        "--source-label",
+        "jmnwong mirror, checksum supplied by parent; exact download URL recorded externally"
+      ],
+      "log": "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\results\\matrix-plan-20261013\\nslkdd-50000\\execution.log"
+    },
+    "nslkdd-100000": {
+      "state": "planned",
+      "command": [
+        "C:\\Users\\immad\\AppData\\Local\\strawberry\\sandbox\\.sandbox-pkg-cache\\uv\\archive-v0\\fSPwEQGbwRYaSO5TgXu0n\\Scripts\\python.exe",
+        "-m",
+        "ppbench.cli",
+        "benchmark",
+        "--dataset",
+        "nslkdd",
+        "--path",
+        "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\data\\external\\KDDTrain+.txt",
+        "--size",
+        "100000",
+        "--output",
+        "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\results\\matrix-plan-20261013\\nslkdd-100000",
+        "--protocol",
+        "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\configs\\protocol.json",
+        "--expected-sha256",
+        "1b86d2f957b33082081bba410fe129b475efebcc13c9014c3f447c8271aadf95",
+        "--source-label",
+        "jmnwong mirror, checksum supplied by parent; exact download URL recorded externally"
+      ],
+      "log": "C:\\Users\\immad\\AppData\\Roaming\\strawberry\\Synced\\6e9f8f3a-6d26-4ebe-98c2-cdbc55af71d9\\strawberry_default\\privacy-preserving-encryption-benchmark\\results\\matrix-plan-20261013\\nslkdd-100000\\execution.log"
+    },
+    "nslkdd-500000": {
+      "state": "unavailable",
+      "reason": "125973 original training rows; no replacement or replication permitted"
+    }
+  },
+  "updated_utc": "2026-10-13T08:31:02.228382+00:00"
+}
